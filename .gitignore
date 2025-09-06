@@ -1,0 +1,23 @@
+﻿# Gradle
+.gradle/
+build/
+**/build/
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+/local.properties
+
+# Keystore (¡NO subir!)
+*.jks
+keystore/
+
+# APKs y binarios
+*.apk
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Otros
+captures/
