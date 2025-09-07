@@ -3,45 +3,31 @@ package com.example.sarastoreandroid
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import com.example.sarastoreandroid.ui.login.LoginScreen
 import com.example.sarastoreandroid.ui.theme.SaraStoreAndroidTheme
 
+/**
+ * Actividad principal que carga la UI con Compose.
+ * - Muestra LoginScreen inicialmente.
+ * - Tras un login exitoso muestra un placeholder de catálogo.
+ */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
             SaraStoreAndroidTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                val logged = remember { mutableStateOf(false) }
+
+                if (!logged.value) {
+                    LoginScreen(onLoginSuccess = { logged.value = true })
+                } else {
+                    // Placeholder: reemplazar por CatalogScreen() en el siguiente módulo
+                    Text(text = "Catálogo - (pendiente por crear)")
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    SaraStoreAndroidTheme {
-        Greeting("Android")
     }
 }

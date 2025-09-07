@@ -56,4 +56,11 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+    // Retrofit para las peticiones HTTP
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+
+// Convertidor de JSON usando Gson
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+
 }
