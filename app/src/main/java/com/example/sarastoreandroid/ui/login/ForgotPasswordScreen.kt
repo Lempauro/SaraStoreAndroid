@@ -1,33 +1,53 @@
 package com.example.sarastoreandroid.ui.login
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
-/**
- * Pantalla placeholder para "¿Olvidaste tu contraseña?"
- * Muestra un texto y un botón "Volver".
- * Cuando se implemente la recuperación real, aquí irá la lógica.
- */
+@OptIn(ExperimentalMaterial3Api::class)
+@Suppress("DEPRECATION") // suprime el warning sobre Icons.Filled.ArrowBack aquí
 @Composable
-fun ForgotPasswordScreen(onBack: () -> Unit) {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(24.dp),
-        contentAlignment = Alignment.Center
-    ) {
+fun ForgotPasswordScreen(
+    onBack: () -> Unit
+) {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Recuperar contraseña") },
+                navigationIcon = {
+                    IconButton(onClick = onBack) {
+                        Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "Atrás")
+                    }
+                }
+            )
+        }
+    ) { padding ->
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "Recuperación de contraseña (pendiente de implementación)")
-            Button(onClick = onBack) {
-                Text(text = "Volver")
+            var email by remember { mutableStateOf("") }
+
+            OutlinedTextField(
+                value = email,
+                onValueChange = { email = it },
+                label = { Text("Correo electrónico") },
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Button(onClick = { onBack() }, modifier = Modifier.fillMaxWidth()) {
+                Text("Enviar instrucciones")
             }
         }
     }

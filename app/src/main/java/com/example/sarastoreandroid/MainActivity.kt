@@ -12,7 +12,13 @@ import com.example.sarastoreandroid.ui.login.RegisterScreen
 import com.example.sarastoreandroid.ui.theme.SaraStoreAndroidTheme
 
 /**
- * MainActivity: controla navegación simple entre pantallas.
+ * MainActivity simple con navegación por estado entre pantallas:
+ * - LOGIN
+ * - REGISTER
+ * - FORGOT
+ * - CATALOG (placeholder)
+ *
+ * Esta versión evita dependencias extra (navigation-compose) y mantiene la app fácil de entender.
  */
 class MainActivity : ComponentActivity() {
 
@@ -33,7 +39,7 @@ class MainActivity : ComponentActivity() {
 
                     Screen.REGISTER -> RegisterScreen(
                         onBack = { current.value = Screen.LOGIN },
-                        onRegisterSuccess = { current.value = Screen.CATALOG }
+                        onRegisterSuccess = { current.value = Screen.LOGIN } // después del registro volvemos al login
                     )
 
                     Screen.FORGOT -> ForgotPasswordScreen(
@@ -41,7 +47,7 @@ class MainActivity : ComponentActivity() {
                     )
 
                     Screen.CATALOG -> {
-                        // Temporal: cuando tengamos CatalogScreen() lo reemplazamos aquí
+                        // Placeholder temporal — lo reemplazaremos con CatalogScreen cuando lo implementemos
                         Text(text = "Catálogo - (pendiente por crear)")
                     }
                 }
