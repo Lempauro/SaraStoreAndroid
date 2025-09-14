@@ -40,8 +40,8 @@ android {
         compose = true
     }
 
-    // <<< Aquí se agrega la opción necesaria para que Compose compile correctamente >>>
     composeOptions {
+        // Si en tu libs.versions.toml tienes otra versión, reemplaza el literal por libs.versions.xxx.get()
         kotlinCompilerExtensionVersion = "1.5.3"
     }
 }
@@ -55,7 +55,8 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
-    testImplementation(libs.junit)
+    testImplementation("junit:junit:4.13.2") // <<-- línea agregada para pruebas unitarias
+    testImplementation(libs.junit) // si ya existía en tu catalogo, está bien mantenerla
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
