@@ -26,7 +26,8 @@ import com.example.sarastoreandroid.R
 data class Product(
     val id: Int,
     val name: String,
-    val price: String,
+    val price: String,    // formato legible (ej. "$90.000")
+    val priceValue: Int,  // valor numérico (ej. 90000)
     val imageRes: Int,
     val sizes: List<String> = listOf("S", "M", "L", "XL")
 )
@@ -168,23 +169,22 @@ fun ProductCard(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(text = "Tallas:", modifier = Modifier.padding(end = 8.dp))
 
-                // <-- Cambiado: altura mayor, singleLine y textStyle para evitar recorte -->
+                // <-- Ajuste: mayor altura y estilo para que no corte la letra -->
                 OutlinedTextField(
                     value = selectedSize,
                     onValueChange = { },
                     readOnly = true,
                     modifier = Modifier
-                        .width(80.dp)
-                        .height(48.dp), // aumento de altura para que no recorte el texto
+                        .width(88.dp)
+                        .height(56.dp), // aumentado para evitar recorte
                     singleLine = true,
-                    textStyle = TextStyle(fontSize = 14.sp), // tamaño de texto legible
+                    textStyle = TextStyle(fontSize = 14.sp),
                     trailingIcon = {
                         IconButton(onClick = { expanded = !expanded }) {
                             Icon(imageVector = Icons.Filled.ArrowDropDown, contentDescription = "Tallas")
                         }
                     }
                 )
-
                 DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
                     product.sizes.forEach { s ->
                         DropdownMenuItem(text = { Text(s) }, onClick = {

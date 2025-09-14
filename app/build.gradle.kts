@@ -14,7 +14,6 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -27,20 +26,27 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = "11"
     }
+
     buildFeatures {
         compose = true
+    }
+
+    // <<< Aquí se agrega la opción necesaria para que Compose compile correctamente >>>
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.3"
     }
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -59,8 +65,6 @@ dependencies {
 
     // Retrofit para las peticiones HTTP
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
-
-// Convertidor de JSON usando Gson
+    // Convertidor de JSON usando Gson
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
-
 }
